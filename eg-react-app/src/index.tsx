@@ -1,6 +1,5 @@
-import { render } from 'react-dom';
-import { App } from './App';
-
+import { render } from "react-dom";
+import { App } from "./App";
 
 // A react component -> Components by function!
 
@@ -8,4 +7,5 @@ import { App } from './App';
 // class				className
 // for 					htmlFor
 // inline styles are strings		objects, numbers == px
-render(<App />, document.getElementById('root'));
+// <!-- comments -->				{/* comments */}
+render(<App />, document.getElementById("root"));
