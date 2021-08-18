@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"; // no path denotes this is from node_modules
-import { getFoods, deleteFood } from "./api/foodsApi"; // always begin with ./
+import { getFoods, deleteFood, addFood } from "./api/foodsApi"; // always begin with ./
 import { Input } from "./shared/Input";
 import { Select } from "./shared/Select";
 
@@ -53,6 +53,12 @@ export function App() {
     setNewFood(_newFood);
   }
 
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const food = await addFood(newFood);
+    setFoods([...foods, food]);
+    setNewFood(emptyFood);
+  }
+
   return (
     <>
       <h1>Cojo's Pantry</h1>
@@ -62,7 +68,7 @@ export function App() {
           2. Grain
           3. Fruit
 */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           id="name"
           label="Name"
@@ -94,6 +100,7 @@ export function App() {
           value={newFood.type}
           onChange={onChange}
         />
+        <input type="submit" value="Save Food" className="btn btn-primary" />
       </form>
 
       <table>
