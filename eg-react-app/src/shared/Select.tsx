@@ -10,24 +10,21 @@ type SelectProps = {
   id: string;
   options: Array<Option>;
   value: string;
+  onChange: React.ChangeEventHandler<HTMLSelectElement>;
 };
 
 // export function Select(props: SelectProps) { // original
 //   const { id, label, options, value } = props; // original
-export function Select({ id, label, options, value }: SelectProps) {
+export function Select({ id, label, options, value, onChange }: SelectProps) {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
       <br />
-      <select id={id}>
+      <select id={id} onChange={onChange} value={value}>
         <option value=""></option>
         {options.map((op) => {
           return (
-            <option
-              selected={value === op.value}
-              key={op.value}
-              value={op.value}
-            >
+            <option key={op.value} value={op.value}>
               {op.label}
             </option>
           );

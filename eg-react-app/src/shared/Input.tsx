@@ -5,19 +5,21 @@ type InputProps = {
   id: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  type?: "text" | "number" | "email" | "phone" | "date";
 };
 
-export function Input(props: InputProps) {
+export function Input({
+  label,
+  id,
+  value,
+  type = "text",
+  onChange,
+}: InputProps) {
   return (
     <div>
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={id}>{label}</label>
       <br />
-      <input
-        id={props.id}
-        type="text"
-        value={props.value}
-        onChange={props.onChange}
-      />
+      <input id={id} type={type} value={value} onChange={onChange} />
     </div>
   );
 }

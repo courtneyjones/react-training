@@ -43,7 +43,9 @@ export function App() {
   // any values in the dependency list that have changed would trigger the effect again.
   // No array of dependencies makes the effect trigger on every render.
 
-  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function onChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
     const { value, id } = event.target;
     // copy existing state of newFood with spread operator and override the name for _newFood.
     const _newFood = { ...newFood, [id]: value }; // by convention, the id will be the same as
@@ -71,16 +73,18 @@ export function App() {
           id="qty"
           label="Qty"
           value={newFood.qty.toString()}
+          type="number"
           onChange={onChange}
         />
         <Input
           id="minQty"
           label="Min Qty"
           value={newFood.minQty.toString()}
+          type="number"
           onChange={onChange}
         />
         <Select
-          id="foodType"
+          id="type"
           label="Type"
           options={[
             { label: "Veggie", value: "veg" },
@@ -88,6 +92,7 @@ export function App() {
             { label: "Fruit", value: "fruit" },
           ]}
           value={newFood.type}
+          onChange={onChange}
         />
       </form>
 
