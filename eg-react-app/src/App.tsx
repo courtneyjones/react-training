@@ -43,10 +43,11 @@ export function App() {
   // any values in the dependency list that have changed would trigger the effect again.
   // No array of dependencies makes the effect trigger on every render.
 
-  function onNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = event.target;
+  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { value, id } = event.target;
     // copy existing state of newFood with spread operator and override the name for _newFood.
-    const _newFood = { ...newFood, name: value };
+    const _newFood = { ...newFood, [id]: value }; // by convention, the id will be the same as
+    // the property changed on the state object
     setNewFood(_newFood);
   }
 
@@ -55,28 +56,28 @@ export function App() {
       <h1>Cojo's Pantry</h1>
 
       {/* Create Select and consume for Food Type
-1. Veggie
-2. Grain
-3. Fruit
+          1. Veggie
+          2. Grain
+          3. Fruit
 */}
       <form>
         <Input
           id="name"
           label="Name"
           value={newFood.name}
-          onChange={onNameChange}
+          onChange={onChange}
         />
         <Input
-          id="quantity"
+          id="qty"
           label="Qty"
           value={newFood.qty.toString()}
-          onChange={onNameChange}
+          onChange={onChange}
         />
         <Input
           id="minQty"
           label="Min Qty"
           value={newFood.minQty.toString()}
-          onChange={onNameChange}
+          onChange={onChange}
         />
         <Select
           id="foodType"
