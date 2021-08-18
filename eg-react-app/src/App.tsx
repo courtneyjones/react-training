@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; // no path denotes this is from node_modules
+import React, { useEffect, useState } from "react"; // no path denotes this is from node_modules
 import { getFoods, deleteFood } from "./api/foodsApi"; // always begin with ./
 import { Input } from "./shared/Input";
 import { Select } from "./shared/Select";
@@ -40,6 +40,15 @@ export function App() {
     }
     callGetFoods();
   }, []); // use empty array for useEffect dependencies so it will only run once
+  // any values in the dependency list that have changed would trigger the effect again.
+  // No array of dependencies makes the effect trigger on every render.
+
+  function onNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target;
+    // copy existing state of newFood with spread operator and override the name for _newFood.
+    const _newFood = { ...newFood, name: value };
+    setNewFood(_newFood);
+  }
 
   return (
     <>
@@ -51,9 +60,24 @@ export function App() {
 3. Fruit
 */}
       <form>
-        <Input id="name" label="Name" value={newFood.name} />
-        <Input id="quantity" label="Qty" value={newFood.qty.toString()} />
-        <Input id="minQty" label="Min Qty" value={newFood.minQty.toString()} />
+        <Input
+          id="name"
+          label="Name"
+          value={newFood.name}
+          onChange={onNameChange}
+        />
+        <Input
+          id="quantity"
+          label="Qty"
+          value={newFood.qty.toString()}
+          onChange={onNameChange}
+        />
+        <Input
+          id="minQty"
+          label="Min Qty"
+          value={newFood.minQty.toString()}
+          onChange={onNameChange}
+        />
         <Select
           id="foodType"
           label="Type"
