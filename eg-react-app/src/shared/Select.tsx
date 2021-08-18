@@ -9,17 +9,25 @@ type SelectProps = {
   label: string;
   id: string;
   options: Array<Option>;
+  value: string;
 };
 
-export function Select(props: SelectProps) {
+// export function Select(props: SelectProps) { // original
+//   const { id, label, options, value } = props; // original
+export function Select({ id, label, options, value }: SelectProps) {
   return (
     <div>
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={id}>{label}</label>
       <br />
-      <select id={props.id}>
-        {props.options.map((op) => {
+      <select id={id}>
+        <option value=""></option>
+        {options.map((op) => {
           return (
-            <option key={op.value} value={op.value}>
+            <option
+              selected={value === op.value}
+              key={op.value}
+              value={op.value}
+            >
               {op.label}
             </option>
           );
