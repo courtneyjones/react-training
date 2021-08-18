@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"; // no path denotes this is from node_modules
+import { toast, ToastContainer } from "react-toastify";
 import { getFoods, deleteFood, addFood } from "./api/foodsApi"; // always begin with ./
 import { Input } from "./shared/Input";
 import { Select } from "./shared/Select";
@@ -54,13 +55,21 @@ export function App() {
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    const food = await addFood(newFood);
-    setFoods([...foods, food]);
-    setNewFood(emptyFood);
+    event.preventDefault();
+
+    try {
+      const addedFood = await addFood(newFood);
+      setFoods([...foods, addedFood]);
+      setNewFood(emptyFood);
+      toast.success("Food saved! 🦄");
+    } catch (error) {
+      toast.error("Failed to add");
+    }
   }
 
   return (
     <>
+      <ToastContainer />
       <h1>Cojo's Pantry</h1>
 
       {/* Create Select and consume for Food Type
