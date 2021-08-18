@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { getFoods, deleteFood } from "./api/foodsApi";
+import { useEffect, useState } from "react"; // no path denotes this is from node_modules
+import { getFoods, deleteFood } from "./api/foodsApi"; // always begin with ./
+import { Input } from "./shared/Input";
+import { Select } from "./shared/Select";
 
 export type Food = {
   id: number;
@@ -27,6 +29,26 @@ export function App() {
   return (
     <>
       <h1>Cojo's Pantry</h1>
+
+      {/* Create Select and consume for Food Type
+1. Veggie
+2. Grain
+3. Fruit
+*/}
+      <form>
+        <Input id="name" label="Name" />
+        <Input id="quantity" label="Qty" />
+        <Input id="minQty" label="Min Qty" />
+        <Select
+          id="foodType"
+          label="Type"
+          options={[
+            { label: "Veggie", value: "veg" },
+            { label: "Grain", value: "grain" },
+            { label: "Fruit", value: "fruit" },
+          ]}
+        />
+      </form>
 
       <table>
         <thead>
