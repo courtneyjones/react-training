@@ -73,7 +73,13 @@ export function App() {
                   <Link to={`/food/${food.id}`}>{food.name}</Link>
                 </td>
                 <td>
-                  <span style={food.qty < food.minQty ? { color: "red" } : {}}>
+                  <span
+                    style={
+                      food.qty < food.minQty
+                        ? { color: "red", fontWeight: "bold" }
+                        : {}
+                    }
+                  >
                     {food.qty}
                   </span>
                 </td>
