@@ -32,3 +32,13 @@ export async function addFood(food: NewFood) {
   if (!response.ok) throw new Error("Add failed.");
   return await response.json();
 }
+
+export async function saveFood(food: Food) {
+  const response = await fetch(baseUrl + "/foods/" + food.id, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(food),
+  });
+  if (!response.ok) throw new Error("Add failed.");
+  return await response.json();
+}

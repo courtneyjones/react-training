@@ -72,7 +72,11 @@ export function App() {
                 <td>
                   <Link to={`/food/${food.id}`}>{food.name}</Link>
                 </td>
-                <td>{food.qty}</td>
+                <td>
+                  <span style={food.qty < food.minQty ? { color: "red" } : {}}>
+                    {food.qty}
+                  </span>
+                </td>
                 <td>{food.minQty}</td>
                 <td>{food.type}</td>
               </tr>
