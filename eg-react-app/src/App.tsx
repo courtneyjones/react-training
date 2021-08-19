@@ -4,12 +4,19 @@ import { About } from "./About";
 import { FoodForm } from "./FoodForm";
 import { Nav } from "./Nav";
 import { Pantry } from "./Pantry";
+import { UserContextProvider, UserContextType } from "./UserContext";
 
+const user: UserContextType = {
+  email: "test@t.com",
+  name: "John",
+  role: "admin",
+  token: "1234",
+};
 export function App() {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <UserContextProvider value={user}>
       <BrowserRouter>
         <Nav />
         <Route path="/about">
@@ -25,6 +32,6 @@ export function App() {
           <Pantry />
         </Route>
       </BrowserRouter>
-    </QueryClientProvider>
+    </UserContextProvider>
   );
 }
