@@ -4,7 +4,7 @@ import { addFood, getFood, saveFood } from "./api/foodsApi";
 import { Input } from "./shared/Input";
 import { Select } from "./shared/Select";
 import { useHistory, useParams } from "react-router-dom";
-import { Food } from "./App";
+import { Food } from "./Pantry";
 
 export type NewFood = {
   name: string;
