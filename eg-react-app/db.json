@@ -1,6 +1,25 @@
 {
   "foods": [
-    { "id": 1, "name": "carrot", "qty": 1, "minQty": 1, "type": "veggie" },
-    { "id": 2, "name": "potato", "qty": 2, "minQty": 1, "type": "veggie" }
+    {
+      "id": 1,
+      "name": "carrot",
+      "qty": 1,
+      "minQty": 1,
+      "type": "veggie"
+    },
+    {
+      "id": 2,
+      "name": "potato",
+      "qty": 2,
+      "minQty": 1,
+      "type": "veggie"
+    },
+    {
+      "name": "Oatmeal",
+      "qty": "2",
+      "minQty": "6",
+      "type": "grain",
+      "id": 3
+    }
   ]
 }
