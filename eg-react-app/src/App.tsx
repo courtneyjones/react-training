@@ -36,12 +36,16 @@ export function App() {
 
       <Link to="/food">Add Food</Link>
 
-      {/* Create Select and consume for Food Type
-          1. Veggie
-          2. Grain
-          3. Fruit
-*/}
+      {foods.length ? table() : emptyPantry()}
+    </>
+  );
 
+  function emptyPantry() {
+    return <p>Uh, oh! No food in pantry!!</p>;
+  }
+
+  function table() {
+    return (
       <table>
         <thead>
           <tr>
@@ -90,6 +94,6 @@ export function App() {
           })}
         </tbody>
       </table>
-    </>
-  );
+    );
+  }
 }
