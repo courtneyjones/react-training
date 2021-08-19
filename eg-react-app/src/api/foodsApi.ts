@@ -7,6 +7,12 @@ export async function getFoods() {
   return response.json() as Promise<Food[]>;
 }
 
+export async function getFood(id: number) {
+  const response = await fetch("http://localhost:3001/foods/" + id);
+  if (!response.ok) throw new Error("Call to getFood() failed.");
+  return response.json() as Promise<Food>;
+}
+
 export async function deleteFood(id: number) {
   const response = await fetch("http://localhost:3001/foods/" + id, {
     method: "DELETE",

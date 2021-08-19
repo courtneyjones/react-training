@@ -69,7 +69,9 @@ export function App() {
                     value="Delete"
                   />
                 </td>
-                <td>{food.name}</td>
+                <td>
+                  <Link to={`/food/${food.id}`}>{food.name}</Link>
+                </td>
                 <td>{food.qty}</td>
                 <td>{food.minQty}</td>
                 <td>{food.type}</td>
