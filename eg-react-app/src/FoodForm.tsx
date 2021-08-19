@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { addFood } from "./api/foodsApi";
 import { Input } from "./shared/Input";
 import { Select } from "./shared/Select";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export type NewFood = {
   name: string;
@@ -22,6 +22,8 @@ const emptyFood: NewFood = {
 export function FoodForm() {
   const [newFood, setNewFood] = useState<NewFood>(emptyFood);
   const history = useHistory();
+
+  const { foodId } = useParams() as any;
 
   function onChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -46,6 +48,7 @@ export function FoodForm() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>{foodId ? "Edit" : "Add"} Food</h1>
       <Input id="name" label="Name" value={newFood.name} onChange={onChange} />
       <Input
         id="qty"

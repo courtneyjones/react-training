@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"; // no path denotes this is from node_modules
+import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getFoods, deleteFood } from "./api/foodsApi"; // always begin with ./
@@ -32,6 +33,8 @@ export function App() {
     <>
       <ToastContainer />
       <h1>Cojo's Pantry</h1>
+
+      <Link to="/food">Add Food</Link>
 
       {/* Create Select and consume for Food Type
           1. Veggie
