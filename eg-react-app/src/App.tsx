@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"; // no path denotes this is from node_modules
-import { toast, ToastContainer } from "react-toastify";
-import { getFoods, deleteFood, addFood } from "./api/foodsApi"; // always begin with ./
-import { Input } from "./shared/Input";
-import { Select } from "./shared/Select";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getFoods, deleteFood } from "./api/foodsApi"; // always begin with ./
 
 export type Food = {
   id: number;
@@ -12,27 +11,12 @@ export type Food = {
   type: string;
 };
 
-export type NewFood = {
-  name: string;
-  qty: number;
-  minQty: number;
-  type: string;
-};
-
-const emptyFood: NewFood = {
-  name: "",
-  qty: 0,
-  minQty: 0,
-  type: "",
-};
-
 // Exercize 2:
 // 1. Add reorderPoint (number), type (string)
 // 2. Display in a table.
 
 export function App() {
   const [foods, setFoods] = useState<Food[]>([]);
-  const [newFood, setNewFood] = useState<NewFood>(emptyFood);
 
   useEffect(() => {
     async function callGetFoods() {
@@ -44,29 +28,6 @@ export function App() {
   // any values in the dependency list that have changed would trigger the effect again.
   // No array of dependencies makes the effect trigger on every render.
 
-  function onChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
-    const { value, id } = event.target;
-    // copy existing state of newFood with spread operator and override the name for _newFood.
-    const _newFood = { ...newFood, [id]: value }; // by convention, the id will be the same as
-    // the property changed on the state object
-    setNewFood(_newFood);
-  }
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    try {
-      const addedFood = await addFood(newFood);
-      setFoods([...foods, addedFood]);
-      setNewFood(emptyFood);
-      toast.success("Food saved! 🦄");
-    } catch (error) {
-      toast.error("Failed to add");
-    }
-  }
-
   return (
     <>
       <ToastContainer />
@@ -77,40 +38,6 @@ export function App() {
           2. Grain
           3. Fruit
 */}
-      <form onSubmit={handleSubmit}>
-        <Input
-          id="name"
-          label="Name"
-          value={newFood.name}
-          onChange={onChange}
-        />
-        <Input
-          id="qty"
-          label="Qty"
-          value={newFood.qty.toString()}
-          type="number"
-          onChange={onChange}
-        />
-        <Input
-          id="minQty"
-          label="Min Qty"
-          value={newFood.minQty.toString()}
-          type="number"
-          onChange={onChange}
-        />
-        <Select
-          id="type"
-          label="Type"
-          options={[
-            { label: "Veggie", value: "veg" },
-            { label: "Grain", value: "grain" },
-            { label: "Fruit", value: "fruit" },
-          ]}
-          value={newFood.type}
-          onChange={onChange}
-        />
-        <input type="submit" value="Save Food" className="btn btn-primary" />
-      </form>
 
       <table>
         <thead>
